@@ -82,5 +82,14 @@ By the end of these tutorials, you will be able to:
 
 ---
 
-#🙌 Contributing
+## 🙌 Contributing
 - Contributions are welcome! Feel free to fork the repository, raise issues, or submit pull requests.
+
+--- 
+
+## ⭐ Star the Repo
+If you found this repository helpful, don't forget to ⭐ it!
+
+---
+
+Let me know if you'd like the `README.md` file exported and uploaded directly here for use, or if you want to include some custom sections (like certificate links, hosted Colab links, etc.).
