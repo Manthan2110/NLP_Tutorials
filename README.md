@@ -78,6 +78,7 @@ By the end of these tutorials, you will be able to:
 | 🔜 | Stacked LSTM  |
 | 🔜 | Transforms |
 | 🔜 | Chatbot from Scratch |
+| 🔜 | Encoder Decoder & Sequnce-to-sequnce Architecture |
 | 🔜 | Transformers and BERT-based models |
 
 ---
