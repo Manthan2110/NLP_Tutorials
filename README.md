@@ -21,6 +21,7 @@ Each tutorial notebook in this repo covers a different area of NLP—from basic 
 | `Fake-News-Analysis.ipynb` | Detecting fake news using NLP preprocessing, TF-IDF, and ML models. |
 | `Disaster_Tweets_Bidirectional_LSTM.ipynb` | Classifying tweets related to natural disasters using Bidirectional LSTM model. |
 | `Next-Word-Prediction-Using-LSTM.ipynb` | Build a next-word prediction model using LSTM for language modeling. |
+| `Disaster_Tweets-Stacked-LSTM.ipynb` | Classifying tweets related to natural disasters using Stcked LSTM model which gain more accuracy than Bidirectional LSTM model. |
 
 ---
 
