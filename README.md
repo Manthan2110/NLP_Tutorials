@@ -75,7 +75,8 @@ By the end of these tutorials, you will be able to:
 | ✅ | Fake News Classification |
 | ✅ | Tweet Disaster Detection |
 | ✅ | Next Word Prediction using LSTM |
-| 🔜 | Stacked LSTM  |
+| ✅ | Stacked LSTM  |
+| 🔜 | GloVe |
 | 🔜 | Transforms |
 | 🔜 | Chatbot from Scratch |
 | 🔜 | Encoder Decoder & Sequnce-to-sequnce Architecture |
