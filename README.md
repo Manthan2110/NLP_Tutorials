@@ -22,6 +22,7 @@ Each tutorial notebook in this repo covers a different area of NLP—from basic 
 | `Disaster_Tweets_Bidirectional_LSTM.ipynb` | Classifying tweets related to natural disasters using Bidirectional LSTM model. |
 | `Next-Word-Prediction-Using-LSTM.ipynb` | Build a next-word prediction model using LSTM for language modeling. |
 | `Disaster_Tweets-Stacked-LSTM.ipynb` | Classifying tweets related to natural disasters using Stcked LSTM model which gain more accuracy than Bidirectional LSTM model. |
+| `GloVe-Model-Using-LSTM.ipynb` | Build a classification model using a GloVe embedding layer followed by an LSTM network. |
 
 ---
 
@@ -77,7 +78,7 @@ By the end of these tutorials, you will be able to:
 | ✅ | Tweet Disaster Detection |
 | ✅ | Next Word Prediction using LSTM |
 | ✅ | Stacked LSTM  |
-| 🔜 | GloVe |
+| ✅ | GloVe |
 | 🔜 | Transforms |
 | 🔜 | Chatbot from Scratch |
 | 🔜 | Encoder Decoder & Sequnce-to-sequnce Architecture |
