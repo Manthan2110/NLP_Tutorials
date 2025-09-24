@@ -1,121 +1,93 @@
-# 🔍 Duplicate Question Pair – Quora NLP Project  
-*“Do these two questions mean the same thing?”* 🤔💬  
+🔍 Duplicate Question Pair – Quora NLP Project
+“Do these two questions mean the same thing?” 🤔💬
 
-This project detects whether **two given questions are semantically identical**, even if they use different words.  
-Built as a continuation of an NLP course, it leverages **feature-rich Machine Learning** on the [Quora Question Pairs](https://www.kaggle.com/c/quora-question-pairs) dataset.
+This project detects whether two given questions are semantically identical, even if they use different words.
+Built as a continuation of an NLP course, it leverages feature-rich Machine Learning on the Quora Question Pairs dataset.
 
----
+🧠 Problem Statement
+Quora aims to merge questions with the same intent to improve search and reduce duplicates.
 
-## 🧠 Problem Statement  
-Quora aims to merge questions with the same intent to improve search and reduce duplicates.  
-> ❓ *Can we automatically detect when two questions mean the same thing?*  
-> ✅ *Yes—using advanced feature engineering and ML.*
+❓ Can we automatically detect when two questions mean the same thing?
+✅ Yes—using advanced feature engineering and ML.
 
----
+📊 Dataset & EDA
+Size: ~400,000 question pairs (≈63 % non-duplicate, ≈37 % duplicate).
+Repetition: ~111k unique questions appear multiple times, some 100+ times.
+Baseline: Bag-of-Words + Random Forest on 30k sample → ~74.5 % accuracy.
 
-## 📊 Dataset & EDA  
-- **Size:** ~400,000 question pairs (≈63 % non-duplicate, ≈37 % duplicate)  
-- **Repetition:** ~111k unique questions appear multiple times, some 100+ times  
-- **Baseline:** Bag-of-Words + Random Forest on 30k sample → **~74.5 % accuracy**
+🏗️ Feature Engineering
+Text Pre-processing
+Lowercasing, de-contractions, special-char replacement, punctuation & numeric cleanup.
+Basic Features (7)
+Char/word counts, common & unique word counts, word-share ratio, etc.
+Advanced Features (15)
+Token Ratios: common/min & common/max words/tokens/stopwords, first/last word match flags.
+Length Metrics: mean/abs diff of token lengths, longest common substring ratio.
+Fuzzy Scores: fuzz_ratio, fuzz_partial_ratio, token_sort_ratio, token_set_ratio.
+Bag-of-Words
+6,000-dimensional BoW vectors for each question.
 
----
+🏆 Feature engineering boosted Random Forest accuracy to ~78 %.
 
-## 🏗️ Feature Engineering  
+🤖 Modeling & Results
+Model	Accuracy	Key Insight
+Random Forest (6022 features)	78 %	Fewer false positives (critical for Quora UX)
+XGBoost	78.2 %	Slightly higher accuracy but more false positives
+Metric Choice: False positives (merging non-duplicates) hurt more than false negatives, so Random Forest chosen despite marginally lower accuracy.
 
-**Text Pre-processing**  
-- Lowercasing, de-contractions, special-char replacement, punctuation & numeric cleanup
+🚀 Deployment
+Framework: Streamlit web app, deployed to Heroku.
+Artifacts: Pickled Random Forest model + CountVectorizer.
+Pipeline: query_point_creator() handles all preprocessing & feature extraction for new input.
 
-**Basic Features (7)**  
-- Char/word counts, common & unique word counts, word-share ratio, etc.
-
-**Advanced Features (15)**  
-- **Token Ratios:** common/min & common/max words/tokens/stopwords, first/last word match flags  
-- **Length Metrics:** mean/abs diff of token lengths, longest common substring ratio  
-- **Fuzzy Scores:** `fuzz_ratio`, `fuzz_partial_ratio`, `token_sort_ratio`, `token_set_ratio`
-
-**Bag-of-Words**  
-- 6,000-dimensional BoW vectors for each question
-
-> 🏆 Feature engineering boosted Random Forest accuracy to **~78 %**
-
----
-
-## 🤖 Modeling & Results  
-
-| Model                         | Accuracy | Key Insight                                           |
-|--------------------------------|---------:|-------------------------------------------------------|
-| Random Forest (6022 features)  | **78 %** | Fewer **false positives** (critical for Quora UX)     |
-| XGBoost                        | 78.2 %   | Slightly higher accuracy but more false positives      |
-
-**Metric Choice:** False positives (merging non-duplicates) hurt more than false negatives, so Random Forest chosen despite marginally lower accuracy.
-
----
-
-## 🚀 Deployment  
-- **Framework:** Streamlit web app, deployed to **Heroku**  
-- **Artifacts:** Pickled Random Forest model + CountVectorizer  
-- **Pipeline:** `query_point_creator()` handles all preprocessing & feature extraction for new input
-
-```text
 User ➡️ Streamlit UI ➡️ Preprocessing & Feature Pipeline ➡️ Random Forest ➡️ Duplicate? ✅/❌
-```
 
----
+📦 Project Structure
+File / Folder	Description
+app.py	Streamlit application entry point
+model/	Pickled Random Forest model & CountVectorizer
+feature_engineering.py	Functions for basic, advanced & fuzzy features
+preprocessing.py	Text cleaning and de-contraction logic
+requirements.txt	Python dependencies
+notebooks/EDA.ipynb	Exploratory analysis and baseline modeling
+query_point_creator.py	Full feature-creation pipeline for new questions
 
-## 📦 Project Structure
 
-| File / Folder            | Description                                      |
-| ------------------------ | ------------------------------------------------ |
-| `app.py`                 | Streamlit application entry point                |
-| `model/`                 | Pickled Random Forest model & CountVectorizer    |
-| `feature_engineering.py` | Functions for basic, advanced & fuzzy features   |
-| `preprocessing.py`       | Text cleaning and de-contraction logic           |
-| `requirements.txt`       | Python dependencies                              |
-| `notebooks/EDA.ipynb`    | Exploratory analysis and baseline modeling       |
-| `query_point_creator.py` | Full feature-creation pipeline for new questions |
+🛠️ Technologies Used
+Language: Python
+ML / NLP: scikit-learn, XGBoost, fuzzywuzzy, NLTK
+Visualization: matplotlib, seaborn, t-SNE
+Deployment: Streamlit, Heroku
+Data Handling: pandas, NumPy
 
----                                                                         
-
-## 🛠️ Language Used
-- Language: Python
-- ML / NLP: scikit-learn, XGBoost, fuzzywuzzy, NLTK
-- Visualization: matplotlib, seaborn, t-SNE
-- Deployment: Streamlit, Heroku
-- Data Handling: pandas, NumPy
-
----
-
-## ⚡ Installation & Setup
+⚡ Installation & Setup
 git clone https://github.com/yourusername/Duplicate-Question-Pair.git
 cd Duplicate-Question-Pair
 python -m venv venv
 source venv/bin/activate      # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 streamlit run app.py
----
 
-## 📈 Future Improvement
-- Scale Training: Train on full dataset using Dask/Vaex or cloud compute
+Visit http://localhost:8501 to test the app.
 
-- Richer Embeddings: TF-IDF, Word2Vec, or TF-IDF-weighted Word2Vec (initial tests ≈80 %)
+📈 Future Improvements
+Scale Training: Train on full dataset using Dask/Vaex or cloud compute.
+Richer Embeddings: TF-IDF, Word2Vec, or TF-IDF-weighted Word2Vec (initial tests ≈80 %).
+Deep Learning: LSTMs or Transformer models (e.g., BERT) for semantic similarity.
+Hyperparameter Search: Grid/Random search for further gains.
+Probability-Based Evaluation: Use predict_proba + log loss for nuanced metrics.
 
-- Deep Learning: LSTMs or Transformer models (e.g., BERT) for semantic similarity
+✨ Key Insights
+Feature Engineering Drives NLP Success: Simple ratios and fuzzy scores meaningfully outperformed plain BoW.
+Preprocessing is Critical: Consistent text cleaning improves downstream features.
+Consider Business Costs: Evaluate confusion matrix, not just accuracy—false positives were more costly for Quora.
+Iterative Refinement Pays Off: Start simple, add features, tune models incrementally.
 
-- Hyperparameter Search: Grid/Random search for further gains
+👨‍💻 Author
+Made with 🧑‍💻 and ❤️ by Manthan Jadav
+LinkedIn
+GitHub
+📧 manthanjadav746@gmail.com
 
-- Probability-Based Evaluation: Use predict_proba + log loss for nuanced metrics
-
----
-## 👨‍💻 Author
-
-Made with 💼 and ❤️ by Manthan Jadav  
-- [LinkedIn](https://www.linkedin.com/in/manthanjadav/)  
-- 📧 Email: manthanjadav746@gmail.com
-
----
-
-## 📜 License
-
-This project is licensed under the MIT License.  
-Feel freely. Fork happily. Contribute generously! 😄
-                                                                         
+📜 License
+This project is licensed under the MIT License – feel free to fork, improve, and share!
